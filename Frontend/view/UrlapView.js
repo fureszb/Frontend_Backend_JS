@@ -5,7 +5,7 @@ class UrlapView {
   #urlapElemLista = [];
   #valid = true;
   #urlapAdatok = {};
-  #formData = {};
+
   constructor(szuloELem, leiro) {
     this.#leiro = leiro;
     this.szuloELem = szuloELem;
@@ -18,34 +18,26 @@ class UrlapView {
     this.submitElem.on("click", (event) => {
       event.preventDefault();
 
-      
-      this.#urlapElemLista.forEach((elem) => {
-        const key = elem.key;
-        const value = elem.ertek;
-        this.#formData[key] = value;
-      });
+  this.sajatEsemeny("elkuldes");
 
-      this.sajatEsemeny("elkuldes");
+  this.#urlapElemLista.forEach((elem) => {
+    this.#valid = true;
+    this.#valid = this.#valid && elem.valid;
+  });
 
-      this.#urlapElemLista.forEach((elem) => {
-        this.#valid = true;
-        this.#valid = this.#valid && elem.valid;
-        console.log(this.#valid);
-      });
-
-      if (this.#valid) {
-        console.log("Valid az urlap!");
-        this.#urlapElemLista.forEach((elem) => {
-          let ertek = elem.ertek;
-          let kulcs = elem.key;
-          this.#urlapAdatok[kulcs] = ertek;
-          //console.log(this.#urlapAdatok)
-          this.sajatEsemeny("AdatKiir");
-        });
-      } else {
-        console.log("Nem valid az urlap!");
-      }
+  //if (this.#valid) {
+    console.log("Valid az urlap!");
+    this.#urlapElemLista.forEach(elem => {
+      const kulcs = elem.key;
+      const ertek = elem.ertek;
+      this.#urlapAdatok[kulcs] = ertek;
     });
+    console.log(this.#urlapAdatok);
+ // } else {
+    console.log("Nem valid az urlap!");
+ // }
+});
+ 
   }
 
   #urlapLetrehoz() {
@@ -58,7 +50,10 @@ class UrlapView {
           );
           break;
         case "number":
-          this.#numberElem(key);
+          this.#urlapElemLista.push(
+            new TextUrlapElem(key, this.#leiro[key], this.formElem)
+          );
+  
           break;
         /*case "radio":
           let txt = `${this.#leiro[key].megj}:<br>`;
@@ -99,7 +94,7 @@ class UrlapView {
     this.formElem.append(txt);
   }
   sajatEsemeny(nev) {
-    let esemenyem = new CustomEvent(nev, { detail: this.#formData });
+    let esemenyem = new CustomEvent(nev, { detail: this.#urlapAdatok });
     window.dispatchEvent(esemenyem);
   }
 }
