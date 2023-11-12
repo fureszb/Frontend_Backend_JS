@@ -7,12 +7,10 @@ class Model {
       axios
         .get(url)
         .then(function (response) {
-          // Válasz beérkezett, meghívjuk a dataCallback függvényt és átadjuk neki a választ.
           dataCallback(response.data);
         })
         .catch(function (error) {
-          // Hiba esetén itt kezelheted a hibát.
-          console.error("Hiba történt:", error);
+           console.error("Hiba történt:", error);
         });
     }
 
@@ -24,14 +22,32 @@ class Model {
           }
         })
         .then((response) => {
-          // Sikeres POST kérés válaszának kezelése
           console.log("RESP", response);
         })
         .catch((error) => {
-          // Hiba esetén itt kezelheted a hibát.
           console.log("hiba", error);
         });
     }
+    
+    deleteData(url, id, csrfToken, successCallback, errorCallback) {
+      axios
+          .delete(url, {
+              data: { id: id }, 
+              headers: {
+                  "X-CSRF-TOKEN": csrfToken
+              }
+          })
+          .then((response) => {
+           
+              console.log("Adatok sikeresen törölve!", response);
+              successCallback(response.data);
+          })
+          .catch((error) => {
+            
+              console.error("Hiba történt a törlés során:", error);
+              errorCallback(error);
+          });
+  }
 }
 
 export default Model;

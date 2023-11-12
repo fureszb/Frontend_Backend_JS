@@ -10,23 +10,6 @@ class TablaView {
     this.tablaHead();
     this.tablaBody();
     
-    this.SzerkesztGomb=$(".szerkeszt:last-child");
-    this.TorlesGomb=$(".torol");
-
-    console.log("Tgomb"+TorlesGomb)
-    console.log("Szgomb"+SzerkesztGomb)
-    
-    this.SzerkesztGomb.on("click", () => {
-      this.#SajatEsemenyem("szerkesztes");
-    });
-    
-    this.TorlesGomb.on("click", () => {
-      this.#SajatEsemenyem("torles");
-      //$(this).closest("tr").remove();
-    });
-    
-    
-    
   }
   tablaHead(){
     let txt = `<thead><tr>`;

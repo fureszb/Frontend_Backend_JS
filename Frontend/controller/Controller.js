@@ -12,26 +12,39 @@ class Controller {
     const ALAPVEGPONT = "http://localhost:8000/"
     this.DATASERVICE = new DataService();
 
-    this.DATASERVICE.getData(ALAPVEGPONT+"writers", this.adatokMegj);
-    this.DATASERVICE.postData(ALAPVEGPONT+"writers");
 
-    $(window).on("szerkesztes", (event) => {
-      console.log("Szerkesztes: "+event.detail)
+    $(window).on("AdatKiir", (event) => {
+      console.log(event.detail);
+      this.DATASERVICE.postData(ALAPVEGPONT + "writers", event.detail);
+     
+    });
+    this.DATASERVICE.getData(ALAPVEGPONT + "writers", this.adatokMegj);
+  
+    $(".torol").on("click", function () {
+      var writerId = $(this).data("id");
       
-    });
-    /*$(window).on("torles", (event) => {
-      console.log("Torles: "+event.detail)
-      event.detail.remove();
-    });*/
 
-    $(window).on("elkuldes", (event) => {
-      console.log("kuld: "+event.detail)
+      model.deleteData("/writers/" + writerId, writerId, csrfToken, 
+          function (responseData) {
+             
+              console.log(responseData.message);
+              
+             
+              deleteRowFromTable(writerId);
+          },
+          function (error) {
+            
+              console.error("Hiba a törlés során:", error);
+          }
+      );
     });
   }
-  adatokMegj(lista){
-   
-    //new AdatView(lista, $(".lista"));
-    new TablaView(lista, $(".tablazat"));
-  }
+
+ 
+adatokMegj(lista){
+
+  //new AdatView(lista, $(".lista"));
+  new TablaView(lista, $(".tablazat"));
+}
 }
 export default Controller;

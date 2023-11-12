@@ -10,8 +10,8 @@ const UrlapLeriro = {
   szul: {
     megj: "Születési idő",
     type: "number",
-    placeholder: "2002",
-    value: "2002",
+    placeholder: "",
+    value: "",
     regex: {
       min: 1000,
       max: 2023,
