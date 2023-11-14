@@ -13,18 +13,12 @@ class UrlapView {
     this.formElem = this.szuloELem.children("form");
     this.#urlapLetrehoz();
     console.log(this.#leiro.index)
-
-    $(".torol").on("click", ()=>{
-      this.sajatEsemeny("torles");
-      $(this).closest("tr").remove();
-    });
+   
+   
     this.submitElem = $("#submit");
     this.submitElem.on("click", (event) => {
 
       event.preventDefault();
-
-
-
 
       this.#urlapElemLista.forEach(elem => {
         let ertek = elem.ertek;
@@ -50,6 +44,7 @@ class UrlapView {
         console.log("Nem valid az urlap!")
       }
     });
+  
 
   };
 

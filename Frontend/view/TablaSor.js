@@ -1,6 +1,6 @@
 class TablaSor{
     constructor(){
-
+        
     }
     SorLetrehozas(lista, index){
         let txt = `<tr>`;
