@@ -29,23 +29,17 @@ class Model {
         });
     }
     
-    deleteData(url, id, csrfToken, successCallback, errorCallback) {
+    deleteData(url, id) {
+      console.log(`${url}/${id}`)
       axios
-          .delete(url, {
-              data: { id: id }, 
-              headers: {
-                  "X-CSRF-TOKEN": csrfToken
-              }
-          })
+          .delete(`${url}/${id}`)
           .then((response) => {
            
               console.log("Adatok sikeresen törölve!", response);
-              successCallback(response.data);
           })
           .catch((error) => {
             
               console.error("Hiba történt a törlés során:", error);
-              errorCallback(error);
           });
   }
 }
