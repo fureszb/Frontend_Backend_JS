@@ -9,35 +9,27 @@ class Controller {
     this.Adatleiro = new Adatleiro();
     this.urlapView = new UrlapView($(".urlap"), this.Adatleiro.getLeiro());
 
-    const ALAPVEGPONT = "http://localhost:8000/"
+    const ALAPVEGPONT = "http://localhost:8000/api/"
     this.DATASERVICE = new DataService();
 
 
     $(window).on("AdatKiir", (event) => {
       console.log(event.detail);
-      this.DATASERVICE.postData(ALAPVEGPONT + "writers", event.detail);
-     
+      //this.DATASERVICE.postData(ALAPVEGPONT + "writers", event.detail);
+      $(".urlap").css("display", "none");
     });
     this.DATASERVICE.getData(ALAPVEGPONT + "writers", this.adatokMegj);
   
-    $(".torol").on("click", function () {
-      var writerId = $(this).data("id");
-      
-
-      model.deleteData("/writers/" + writerId, writerId, csrfToken, 
-          function (responseData) {
-             
-              console.log(responseData.message);
-              
-             
-              deleteRowFromTable(writerId);
-          },
-          function (error) {
-            
-              console.error("Hiba a törlés során:", error);
-          }
-      );
+    $(window).on("torles", (event) => {
+      console.log(event.detail);
+     // this.DATASERVICE.deleteData(ALAPVEGPONT + "writers/"+event.detail.id);
     });
+  
+    
+
+    $(".ujhozzaadas").on("click", function () {
+      $(".urlap").css("display", "block"); });
+  
   }
 
  

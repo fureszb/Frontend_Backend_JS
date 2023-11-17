@@ -23,9 +23,17 @@ class Model {
         })
         .then((response) => {
           console.log("RESP", response);
+          location.reload(true);
+        
+          if (response.data.success) {
+            console.log("Adatok sikeresen elküldve a szervernek.");
+            
+          } else {
+            console.error("Szerver hiba:", response.data.error);
+          }
         })
         .catch((error) => {
-          console.log("hiba", error);
+          console.error("Hiba az adatok küldése közben:", error);
         });
     }
     
