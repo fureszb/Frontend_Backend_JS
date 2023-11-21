@@ -23,7 +23,9 @@ class Model {
 
   postData(url, data, csrfToken) {
     $("#spinner").show();
-    $(".tablazat").hide();
+    setTimeout(function() {
+      $(".tablazat").hide();
+    }, 1000);
 
     axios
       .post(url, data, {
