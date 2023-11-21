@@ -27,6 +27,11 @@ class Controller {
         console.log(event.detail);
         this.DATASERVICE.deleteData(ALAPVEGPONT + "writers/"+event.detail);
       });
+
+      $(window).on("szerkesztes", (event) => { 
+        console.log(event.detail);
+        this.DATASERVICE.putData(ALAPVEGPONT + "writers/"+event.detail.id, event.detail);
+      });
   
   }
 

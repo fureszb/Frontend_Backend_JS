@@ -12,7 +12,6 @@ class UrlapView {
     this.szuloELem.html("<form>")
     this.formElem = this.szuloELem.children("form");
     this.#urlapLetrehoz();
-    console.log(this.#leiro.index)
     this.TR=this.szuloELem.children("tr:last-child");
    this.TOROL = this.TR.children("td:last-child").children(".torol");
     console.log(this.TOROL)
@@ -26,7 +25,6 @@ class UrlapView {
         let ertek = elem.ertek;
         let kulcs = elem.key;
         this.#urlapAdatok[kulcs] = ertek;
-        //console.log(this.#urlapAdatok)
         this.sajatEsemeny("AdatKiir");
       });
 
