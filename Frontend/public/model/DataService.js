@@ -1,7 +1,7 @@
 class Model {
   constructor() {}
 
-  getData(url) {
+  getData(url, dataCallback) {
     $("#spinner").show();
     $(".tablazat").hide();
 
@@ -10,6 +10,7 @@ class Model {
     axios
       .get(url)
       .then(function (response) {
+        dataCallback(response.data);
       })
       .catch(function (error) {
         console.error("Hiba történt:", error);
@@ -71,6 +72,30 @@ class Model {
       });
   }
 
+  putData(url, data, csrfToken) {
+    $("#spinner").show();
+    $(".tablazat").hide();
+
+    axios
+      .put(url, data, {
+        headers: {
+          "X-CSRF-TOKEN": csrfToken,
+        },
+      })
+      .then((response) => {
+        location.reload(true);
+        console.log("Adatok sikeresen módosítva!", response);
+        successCallback(response.data);
+      })
+      .catch((error) => {
+        console.error("Hiba történt az adatok módosítása közben:", error);
+        errorCallback(error);
+      })
+      .finally(function () {
+        $("#spinner").hide();
+        $(".tablazat").show();
+      });
+  }
 }
 
 export default Model;

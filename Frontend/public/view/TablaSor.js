@@ -1,13 +1,14 @@
 class TablaSor {
   constructor(szuloElem, lista, index) {
+    this.currentPath = window.location.pathname;
+    console.log(this.currentPath)
     szuloElem.append(this.SorLetrehozas(lista, index));
     this.trElem = szuloElem.children("tr:last-child");
 
 
     this.favGomb = this.trElem.find(".fav");
     this.torolGomb = this.trElem.find(".torol");
-    this.currentPath = window.location.pathname;
-
+    
 
     this.favGomb.on("click", () => {
       this.tdId = this.trElem.find(".id").text();
@@ -39,7 +40,7 @@ class TablaSor {
       }
     }
     if (this.currentPath.includes('favorit.html')) {
-      txt += `<td class="gombok"><button id="${lista[index].id}" type="button" class="btn btn-danger torol">❌</button></td>`;
+      txt += `<td class="gombok"><button id="${lista[index].id}" type="button" class="btn btn-primary torol">❌</button></td>`;
     } else {
       txt += `<td class="gombok"><button id="${lista[index].id}" type="button" class="btn btn-primary fav">⭐</button></td>`;
     }
@@ -48,7 +49,7 @@ class TablaSor {
   }
 
   #TorolEsemenyem() {
-    const esemenyem = new CustomEvent("torol", { detail: this.tdId });
+    const esemenyem = new CustomEvent("torol", { detail: this.torolGomb.attr("id") });
     window.dispatchEvent(esemenyem);
   }
   #SzerkesztEsemenyem() {
