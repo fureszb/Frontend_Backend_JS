@@ -46,7 +46,7 @@ class Model {
               }
           })
           .then((response) => {
-           
+            location.reload(true);
               console.log("Adatok sikeresen törölve!", response);
               successCallback(response.data);
           })
