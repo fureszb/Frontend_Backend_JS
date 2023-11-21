@@ -1,6 +1,5 @@
 import DataService from "../model/DataService.js";
 import TablaView from "../view/TablaView.js";
-import AdatView from "../view/AdatView.js";
 import Adatleiro from "../model/adatLeiro.js";
 import UrlapView from "../view/UrlapView.js";
 class Controller {
@@ -15,27 +14,29 @@ class Controller {
 
     $(window).on("AdatKiir", (event) => {
       console.log(event.detail);
-      //this.DATASERVICE.postData(ALAPVEGPONT + "writers", event.detail);
+      this.DATASERVICE.postData(ALAPVEGPONT + "writers", event.detail);
       $(".urlap").css("display", "none");
     });
+    
     this.DATASERVICE.getData(ALAPVEGPONT + "writers", this.adatokMegj);
   
-    $(window).on("torles", (event) => {
-      console.log(event.detail);
-     // this.DATASERVICE.deleteData(ALAPVEGPONT + "writers/"+event.detail.id);
-    });
-  
-    
-
     $(".ujhozzaadas").on("click", function () {
       $(".urlap").css("display", "block"); });
+
+      $(window).on("torol", (event) => { 
+        console.log(event.detail);
+        this.DATASERVICE.deleteData(ALAPVEGPONT + "writers/"+event.detail);
+      });
+
+      $(window).on("szerkesztes", (event) => { 
+        console.log(event.detail);
+        this.DATASERVICE.putData(ALAPVEGPONT + "writers/"+event.detail.id, event.detail);
+      });
   
   }
 
  
 adatokMegj(lista){
-
-  //new AdatView(lista, $(".lista"));
   new TablaView(lista, $(".tablazat"));
 }
 }
