@@ -23,7 +23,7 @@ class Model {
 
   postData(url, data, csrfToken) {
     $("#spinner").show();
-    setTimeout(function() {
+    setTimeout(() => {
       $(".tablazat").hide();
     }, 1000);
 
@@ -35,16 +35,22 @@ class Model {
       })
       .then((response) => {
         console.log("RESP", response);
-        location.reload(true);
+        //location.reload(true);
+        this.respond = $(".respond");
+        this.respond.html(`<p class="text-success text-center">Sikeressen hozzáadatva a kedvencekhez!</p>`).show();
+        setTimeout(() => {
+          this.respond.hide();
+        }, 2000);
       })
       .catch((error) => {
         console.error("Hiba az adatok küldése közben:", error);
       })
-      .finally(function () {
+      .finally(() => {
         $("#spinner").hide();
         $(".tablazat").show();
       });
   }
+
 
   deleteData(url, id, csrfToken) {
     $("#spinner").show();
@@ -72,30 +78,6 @@ class Model {
       });
   }
 
-  putData(url, data, csrfToken) {
-    $("#spinner").show();
-    $(".tablazat").hide();
-
-    axios
-      .put(url, data, {
-        headers: {
-          "X-CSRF-TOKEN": csrfToken,
-        },
-      })
-      .then((response) => {
-        location.reload(true);
-        console.log("Adatok sikeresen módosítva!", response);
-        successCallback(response.data);
-      })
-      .catch((error) => {
-        console.error("Hiba történt az adatok módosítása közben:", error);
-        errorCallback(error);
-      })
-      .finally(function () {
-        $("#spinner").hide();
-        $(".tablazat").show();
-      });
-  }
 }
 
 export default Model;

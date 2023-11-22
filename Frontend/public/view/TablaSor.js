@@ -5,10 +5,11 @@ class TablaSor {
     szuloElem.append(this.SorLetrehozas(lista, index));
     this.trElem = szuloElem.children("tr:last-child");
 
-
+    
+    
     this.favGomb = this.trElem.find(".fav");
     this.torolGomb = this.trElem.find(".torol");
-    
+
 
     this.favGomb.on("click", () => {
       this.tdId = this.trElem.find(".id").text();
@@ -22,10 +23,15 @@ class TablaSor {
       console.log(this.lista);
       this.#SzerkesztEsemenyem();
     });
-    
+
     this.torolGomb.on("click", () => {
       const confirmed = confirm("Biztosan törölni szeretnéd?");
       if (confirmed) {
+        this.respond = $(".respond");
+        this.respond.html(`<p class="text-danger text-center">Sikeresen törölted a kedvencekből!</p>`);
+        setTimeout(function () {
+          this.respond.html('');
+        }, 2000);
         this.#TorolEsemenyem();
       }
     });
@@ -40,7 +46,7 @@ class TablaSor {
       }
     }
     if (this.currentPath.includes('favorit.html')) {
-      txt += `<td class="gombok"><button id="${lista[index].id}" type="button" class="btn btn-primary torol">❌</button></td>`;
+      txt += `<td class="gombok"><button id="${lista[index].id}" type="button" class="btn btn-dark torol">❌</button></td>`;
     } else {
       txt += `<td class="gombok"><button id="${lista[index].id}" type="button" class="btn btn-primary fav">⭐</button></td>`;
     }

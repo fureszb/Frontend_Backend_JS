@@ -32,6 +32,7 @@ class Controller {
 
   adatokMegj(lista) {
     new TablaView(lista, $(".adatok"));
+    console.log(lista)
   }
 }
 export default Controller;
