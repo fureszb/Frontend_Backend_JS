@@ -53,6 +53,7 @@ class TablaSor {
     this.megtekint.on("click", () => {
       this.#ViewEsemenyem();
       this.SzulKonyvek.css("display", "block");
+      console.log(this.tdNev.text())
     });
   }
   SorLetrehozas(lista, index) {
@@ -80,10 +81,10 @@ class TablaSor {
   }
   #ViewEsemenyem() {
     const esemenyem = new CustomEvent("view", {
-      detail: this.trId,
+        detail: [this.trId, this.tdNev.text()]
     });
     window.dispatchEvent(esemenyem);
-  }
+}
 
   convertToInput() {
     const inputNev = $("<input>").attr("type", "text").val(this.tdNev.text());

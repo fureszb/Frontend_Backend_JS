@@ -37,9 +37,10 @@ class Controller {
     });
 
     $(window).on("view", (event) => {
-      const trId = event.detail;
+      const trId = event.detail[0];
+      const tdNev = event.detail[1];
       console.log(trId);
-      this.DATASERVICE.getData(ALAPVEGPONT + "books", (lista) => this.adatokMegjPop(lista, trId));
+      this.DATASERVICE.getData(ALAPVEGPONT + "books", (lista) => this.adatokMegjPop(lista, trId, tdNev));
   });
   
   }
@@ -47,8 +48,8 @@ class Controller {
   adatokMegj(lista) {
     new TablaView(lista, $(".tablazat"));
   }
-  adatokMegjPop(lista,trId) {
-    new PopUpView(lista, $(".konyvek"), trId);
+  adatokMegjPop(lista,trId, nev) {
+    new PopUpView(lista, $(".konyvek"), trId, nev);
   }
 }
 export default Controller;
