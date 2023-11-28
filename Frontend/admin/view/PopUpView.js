@@ -47,10 +47,7 @@ class PopUpView {
   PopUp() {
     let txt="";
     this.felugroCard = $(".card-body");
-
     const trId = this.#tablaSor;
-
-    console.log(this.#lista);
     for (let index = 0; index < this.#lista.length; index++) {
       if (this.#lista[index].writer_id == trId) {
         txt += `<h4 class="card-title">${this.#lista[index].nev}</h4>`;
