@@ -22,10 +22,10 @@ return new class extends Migration
         });
         
         Writer::create( [
-            'nev'=> 'Pista', 'szul'=>1995
+            'nev'=> 'Antoine de Saint-Exupéry', 'szul'=>1995
         ]);
         Writer::create( [
-            'nev'=> 'Sanyi', 'szul'=>2005
+            'nev'=> 'Stephen King', 'szul'=>2005
         ]);
 
     }
