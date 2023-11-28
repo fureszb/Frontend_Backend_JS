@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WriterController;
 use App\Http\Controllers\FavoritController;
+use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,7 @@ Route::prefix('favorits')->group(function () {
     Route::get('/{id}', [FavoritController::class, 'show']);
     Route::post('/', [FavoritController::class, 'store']);
     Route::delete('/{id}', [FavoritController::class, 'destroy']);
+
 });
+
+Route::get('/books', [BookController::class, 'index'])->name('books.index');

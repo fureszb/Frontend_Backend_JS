@@ -71,3 +71,4 @@ class WriterController extends Controller
         return response()->json(['message' => 'A szerző sikeresen törölve.']);
     }
 }
+

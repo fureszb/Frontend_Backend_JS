@@ -38,4 +38,14 @@ nav{
     height: 3rem;
     margin: 10px;
   }
-  
+  nav h2{
+    color: white;
+    padding-right: 20px;
+    font-size: 26px;
+  }
+  .table-bordered{
+    box-shadow: 3px 2px 20px 0px;
+  }
+  .konyvek{
+    display: none;
+  }

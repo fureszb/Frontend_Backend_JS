@@ -9,25 +9,25 @@ class TablaSor {
     this.tdNev = this.trElem.find(".nev");
     this.tdSzul = this.trElem.find(".szul");
 
+    this.SzulKonyvek = $(".konyvek");
+    
     this.szGomb.on("click", () => {
       this.tdGombok.html(
         `<button id="${lista[index].id}" type="button" class="btn btn-primary ment">✔</button><button id="${lista[index].id}" type="button" class="btn btn-primary megsem">❌</button>`
       );
       this.convertToInput();
-      
 
       this.megsemGomb = this.trElem.find(".megsem");
       this.mentmGomb = this.trElem.find(".ment");
 
       this.mentmGomb.on("click", () => {
-        
         const editedNev = this.tdNev.find("input").val();
         const editedSzul = this.tdSzul.find("input").val();
         this.editedData = {
-            id: this.trId,
-            nev: editedNev,
-            szul: editedSzul,
-          };
+          id: this.trId,
+          nev: editedNev,
+          szul: editedSzul,
+        };
         this.#SzerkesztEsemenyem();
         this.convertToNormal();
       });
@@ -47,6 +47,13 @@ class TablaSor {
         this.#TorolEsemenyem();
       }
     });
+
+
+    this.megtekint = this.trElem.find(".megtekint");
+    this.megtekint.on("click", () => {
+      this.#ViewEsemenyem();
+      this.SzulKonyvek.css("display", "block");
+    });
   }
   SorLetrehozas(lista, index) {
     let txt;
@@ -56,7 +63,7 @@ class TablaSor {
         txt += `<td class="${key}">${lista[index][key]}</td>`;
       }
     }
-    txt += `<td class="gombok"><button id="${lista[index].id}" type="button" class="btn btn-primary szerkeszt">📝</button></td><td><button id="${lista[index].id}" type="button" class="btn btn-default torol" >❌</button></td>`;
+    txt += `<td><button id="${lista[index].id}" type="button" class="btn btn-primary megtekint">Megtekint</button></td><td class="gombok"><button id="${lista[index].id}" type="button" class="btn btn-primary szerkeszt">📝</button></td><td><button id="${lista[index].id}" type="button" class="btn btn-default torol" >❌</button></td>`;
 
     txt += `</tr>`;
     return txt;
@@ -66,7 +73,15 @@ class TablaSor {
     window.dispatchEvent(esemenyem);
   }
   #SzerkesztEsemenyem() {
-    const esemenyem = new CustomEvent("szerkesztes", { detail: this.editedData });
+    const esemenyem = new CustomEvent("szerkesztes", {
+      detail: this.editedData,
+    });
+    window.dispatchEvent(esemenyem);
+  }
+  #ViewEsemenyem() {
+    const esemenyem = new CustomEvent("view", {
+      detail: this.trId,
+    });
     window.dispatchEvent(esemenyem);
   }
 
@@ -88,5 +103,6 @@ class TablaSor {
     this.tdNev.html(inputNevValue);
     this.tdSzul.html(inputSzulValue);
   }
+ 
 }
 export default TablaSor;

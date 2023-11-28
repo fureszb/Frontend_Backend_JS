@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Furesz Bence</title>
+    <title>Admin - Furesz Bence</title>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="main.js" type="module"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -15,17 +15,34 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-
     <main>
       <nav>
-        <button type="button" class="btn btn-success ujhozzaadas">+</button>
+       
       </nav>
-        <article>
-          <center><div id="spinner" class="spinner-border text-primary" ></div></center>
-          <div class="urlap"></div>
-          <div class="tablazat"></div>
-        </article>
-        <footer>Furesz Bence</footer>
+
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+             <h2>Admin Felület</h2>
+            </li>
+            <li class="nav-item">
+               <button type="button" class="btn btn-success ujhozzaadas">+</button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <article>
+       
+        <center>
+          <div id="spinner" class="spinner-border text-primary"></div>
+        </center>
+        <div class="urlap"></div>
+        <div class="konyvek"></div>
+        <div class="tablazat"></div>
+      </article>
+      <footer>Furesz Bence</footer>
     </main>
   </body>
 </html>
